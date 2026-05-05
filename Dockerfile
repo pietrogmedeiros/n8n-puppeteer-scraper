@@ -4,9 +4,13 @@ RUN apk add --no-cache chromium
 
 WORKDIR /app
 
-COPY package.json .
-RUN npm install
+# Copia package.json ANTES de npm install
+COPY package.json package.json
 
+# Instala dependências
+RUN npm install --verbose
+
+# Depois copia o resto
 COPY server.js .
 
 EXPOSE 3000
