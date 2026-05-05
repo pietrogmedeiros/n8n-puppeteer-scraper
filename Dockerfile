@@ -1,8 +1,17 @@
-FROM mcr.microsoft.com/playwright/python:v1.40.0-focal
+FROM node:18-alpine
 
-RUN npm install -g puppeteer express
+RUN apk add --no-cache \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-dejavu \
+    dbus
 
 WORKDIR /app
+
+RUN npm install puppeteer express body-parser
 
 COPY server.js .
 
